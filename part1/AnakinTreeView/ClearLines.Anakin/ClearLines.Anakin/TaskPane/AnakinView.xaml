@@ -1,0 +1,34 @@
+﻿<UserControl x:Class="ClearLines.Anakin.TaskPane.AnakinView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:TreeView="clr-namespace:ClearLines.Anakin.TaskPane.TreeView">
+    <StackPanel Margin="5">
+      
+        <TreeView ItemsSource="{Binding Path=ExcelViewModel.Workbooks}"
+                  SelectedItemChanged="SelectedItemChanged"
+                  Height="200">
+         
+            <TreeView.Resources>
+               <HierarchicalDataTemplate 
+                    DataType="{x:Type TreeView:WorkbookViewModel}"
+                    ItemsSource="{Binding Worksheets}">
+               <StackPanel Margin="0,0,0,3" Orientation="Horizontal">
+                  <Image Source="{Binding ImagePath}" Height="25"/>
+                  <StackPanel Margin="3,0,0,0">
+                     <TextBlock Text="{Binding Name}"/>
+                     <TextBlock Text="{Binding Author}" FontSize="9" Foreground="Gray"/>
+                  </StackPanel>
+               </StackPanel>
+            </HierarchicalDataTemplate>               
+                <HierarchicalDataTemplate DataType="{x:Type TreeView:WorksheetViewModel}">
+               <StackPanel Orientation="Horizontal">
+                  <Image Source="{Binding ImagePath}" Height="25"/>
+                  <StackPanel>
+                        <TextBlock Text="{Binding Name}"/>
+                   </StackPanel>
+                  </StackPanel>
+                </HierarchicalDataTemplate>                                         
+            </TreeView.Resources>
+        </TreeView>
+    </StackPanel>
+</UserControl>

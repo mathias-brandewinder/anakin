@@ -1,0 +1,48 @@
+﻿<UserControl x:Class="ClearLines.Anakin.TaskPane.Comparison.ComparisonView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:this="clr-namespace:ClearLines.Anakin.TaskPane.Comparison"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+   <Grid>
+      <Grid.Resources>
+         <this:HasDifferenceConverter x:Key="formatter"/>
+      </Grid.Resources>
+      <Grid.RowDefinitions>
+         <RowDefinition Height="23" />
+         <RowDefinition Height="23"/>
+         <RowDefinition Height="23"/>
+         <RowDefinition Height="23"/>
+         <RowDefinition Height="15"/>
+      </Grid.RowDefinitions>
+      <Grid.ColumnDefinitions>
+         <ColumnDefinition Width="30"/>
+         <ColumnDefinition Width="55"/>
+         <ColumnDefinition Width="*"/>
+         <ColumnDefinition Width="30"/>
+      </Grid.ColumnDefinitions>
+      <Button Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" 
+              Command="{Binding Path=GoToPreviousDifference}"
+              Content="&lt;" Height="30"/>
+      <Button Grid.Row="0" Grid.Column="3" Grid.RowSpan="2" 
+              Command="{Binding Path=GoToNextDifference}"
+              Content=">" Height="30"/>
+      <Label Grid.Row="0" Grid.Column="1" Content="Value"/>
+      <Label Grid.Row="2" Grid.Column="1" Content="Formula"/>
+      <TextBox Grid.Row="0" Grid.Column="2" 
+               Text="{Binding Path=SelectedDifference.OriginalValue}"
+               IsReadOnly="True"/>
+      <TextBox Grid.Row="1" Grid.Column="2" 
+               Text="{Binding Path=SelectedDifference.OtherValue}"
+               IsReadOnly="True"
+               Background="{Binding Path=SelectedDifference.AreValuesDifferent, Converter={StaticResource formatter}}"/>
+      <TextBox Grid.Row="2" Grid.Column="2" 
+               Text="{Binding Path=SelectedDifference.OriginalFormula}"
+               IsReadOnly="True"/>
+      <TextBox Grid.Row="3" Grid.Column="2" 
+               Text="{Binding Path=SelectedDifference.OtherFormula}"
+               IsReadOnly="True"
+               Background="{Binding Path=SelectedDifference.AreFormulasDifferent, Converter={StaticResource formatter}}"/>
+      <TextBlock Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" 
+                 Text="{Binding Path=SelectedDifference.Location}"
+                 FontSize="9"/>
+   </Grid>
+</UserControl>
